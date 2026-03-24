@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>4Fans — Coming Soon / Очаквайте Скоро</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080c08;
+      color: white;
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 25s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridMove {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    .glow-green {
+      position: fixed; top: 15%; left: 25%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(34,197,94,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: breathe 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .glow-red {
+      position: fixed; bottom: 15%; right: 15%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(220,38,38,0.09) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: breathe 5s ease-in-out infinite 2.5s;
+      pointer-events: none;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1);    opacity: 0.8; }
+      50%       { transform: scale(1.15); opacity: 1;   }
+    }
+
+    .ball {
+      position: fixed; font-size: 28px;
+      opacity: 0.06; pointer-events: none;
+      animation: rise linear infinite;
+    }
+    @keyframes rise {
+      0%   { transform: translateY(110vh) rotate(0deg);   }
+      100% { transform: translateY(-10vh) rotate(720deg); }
+    }
+
+    .container {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 40px 24px;
+      max-width: 700px; width: 100%;
+      gap: 28px;
+    }
+
+    .fade { animation: fadeUp 0.9s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 99px; padding: 7px 20px;
+      color: #22c55e; font-size: 11px; font-weight: 900;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      animation-delay: 0.1s;
+    }
+    .dot {
+      width: 6px; height: 6px; background: #22c55e;
+      border-radius: 50%;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.15; }
+    }
+
+    .logo {
+      width: clamp(180px, 42vw, 270px);
+      height: auto; object-fit: contain;
+      filter: drop-shadow(0 0 40px rgba(34,197,94,0.20));
+      animation-delay: 0.2s;
+    }
+
+    .headline { display: flex; flex-direction: column; gap: 4px; animation-delay: 0.3s; }
+    .line-en {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 13vw, 100px);
+      letter-spacing: 0.06em; line-height: 1;
+      color: #22c55e;
+    }
+    .line-bg {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 8.5vw, 66px);
+      letter-spacing: 0.06em; line-height: 1;
+      color: #dc2626;
+    }
+
+    .divider {
+      width: 100px; height: 3px; border-radius: 99px;
+      background: linear-gradient(90deg, #22c55e, #dc2626);
+      animation-delay: 0.4s; position: relative; overflow: hidden;
+    }
+    .divider::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%);  }
+    }
+
+    .desc {
+      color: #94a3b8;
+      font-size: clamp(13px, 2vw, 16px);
+      line-height: 1.9; max-width: 500px;
+      font-weight: 300; animation-delay: 0.5s;
+    }
+    .desc strong { color: white; font-weight: 700; }
+
+    .countdown {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      justify-content: center; animation-delay: 0.6s;
+    }
+    .box {
+      background: #111a11;
+      border: 1px solid rgba(34,197,94,0.15);
+      border-radius: 16px; padding: 16px 18px; min-width: 78px;
+    }
+    .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px; color: #22c55e; line-height: 1;
+    }
+    .lbl {
+      font-size: 9px; color: #475569;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 700; margin-top: 4px;
+    }
+
+    .notify {
+      display: flex; gap: 10px;
+      max-width: 440px; width: 100%;
+      flex-wrap: wrap; justify-content: center;
+      animation-delay: 0.7s;
+    }
+    .notify input {
+      flex: 1; min-width: 200px;
+      background: #111a11;
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 12px; padding: 12px 16px;
+      color: white; font-size: 14px;
+      font-family: 'Barlow', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .notify input:focus { border-color: #22c55e; }
+    .notify input::placeholder { color: #374151; }
+    .notify button {
+      padding: 12px 22px; border-radius: 12px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white; font-weight: 900; font-size: 12px;
+      letter-spacing: 0.12em; border: none; cursor: pointer;
+      font-family: 'Barlow', sans-serif;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .notify button:hover { opacity: 0.88; transform: scale(1.03); }
+    #thanks { color: #22c55e; font-weight: 900; font-size: 15px; display: none; animation-delay: 0.7s; }
+
+    footer {
+      position: fixed; bottom: 18px;
+      color: #1a2e1a; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    @media (max-width: 420px) {
+      .box { min-width: 62px; padding: 12px 12px; }
+      .num { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="glow-green"></div>
+  <div class="glow-red"></div>
+
+  <div class="ball" style="left:4%;animation-duration:14s;animation-delay:0s">⚽</div>
+  <div class="ball" style="left:18%;animation-duration:18s;animation-delay:3s">⚽</div>
+  <div class="ball" style="left:36%;animation-duration:11s;animation-delay:6s">⚽</div>
+  <div class="ball" style="left:55%;animation-duration:16s;animation-delay:1s">⚽</div>
+  <div class="ball" style="left:72%;animation-duration:13s;animation-delay:4s">⚽</div>
+  <div class="ball" style="left:88%;animation-duration:19s;animation-delay:8s">⚽</div>
+
+  <div class="container">
+
+    <div class="badge fade">
+      <span class="dot"></span>
+      4fans.bg
+    </div>
+
+    <img src="logo.png" alt="4Fans" class="logo fade"/>
+
+    <div class="headline fade">
+      <div class="line-en">COMING SOON</div>
+      <div class="line-bg">ОЧАКВАЙТЕ СКОРО</div>
+    </div>
+
+    <div class="divider fade"></div>
+
+    <p class="desc fade">
+      <strong>Нещо голямо идва · Something big is coming</strong><br/>
+      Подготвяме нещо специално за истинските фенове.<br/>
+      We're preparing something special for true fans.
+    </p>
+
+    <div class="countdown fade">
+      <div class="box"><div class="num" id="cd-d">00</div><div class="lbl">Дни / Days</div></div>
+      <div class="box"><div class="num" id="cd-h">00</div><div class="lbl">Часа / Hours</div></div>
+      <div class="box"><div class="num" id="cd-m">00</div><div class="lbl">Мин / Min</div></div>
+      <div class="box"><div class="num" id="cd-s">00</div><div class="lbl">Сек / Sec</div></div>
+    </div>
+
+    <div class="notify fade">
+      <input type="email" id="email-input" placeholder="вашият имейл / your@email.com"/>
+      <button onclick="subscribe()">УВЕДОМИ МЕ / NOTIFY ME</button>
+    </div>
+    <div id="thanks" class="fade">✓ Ще ви уведомим! / We'll notify you!</div>
+
+  </div>
+
+  <footer>© 2026 4Fans.bg — For True Fans</footer>
+
+  <script>
+    // Change this date to your planned launch date
+    const launch = new Date("2026-06-01T00:00:00");
+
+    function tick() {
+      const diff = launch - new Date();
+      if (diff <= 0) return;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000)  / 60000);
+      const s = Math.floor((diff % 60000)    / 1000);
+      document.getElementById("cd-d").textContent = String(d).padStart(2,"0");
+      document.getElementById("cd-h").textContent = String(h).padStart(2,"0");
+      document.getElementById("cd-m").textContent = String(m).padStart(2,"0");
+      document.getElementById("cd-s").textContent = String(s).padStart(2,"0");
+    }
+    tick(); setInterval(tick, 1000);
+
+    function subscribe() {
+      const val = document.getElementById("email-input").value;
+      if (!val || !val.includes("@")) return;
+      document.querySelector(".notify").style.display = "none";
+      document.getElementById("thanks").style.display = "block";
+    }
+  </script>
+</body>
+</html>
